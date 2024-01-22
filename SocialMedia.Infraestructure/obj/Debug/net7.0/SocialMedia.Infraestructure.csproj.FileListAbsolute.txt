@@ -1,0 +1,17 @@
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\bin\Debug\net7.0\SocialMedia.Infraestructure.deps.json
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\bin\Debug\net7.0\SocialMedia.Infraestructure.dll
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\bin\Debug\net7.0\SocialMedia.Infraestructure.pdb
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\bin\Debug\net7.0\SocialMedia.Core.dll
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\bin\Debug\net7.0\SocialMedia.Core.pdb
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\obj\Debug\net7.0\SocialMedia.Infraestructure.csproj.AssemblyReference.cache
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\obj\Debug\net7.0\SocialMedia.Infraestructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\obj\Debug\net7.0\SocialMedia.Infraestructure.AssemblyInfoInputs.cache
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\obj\Debug\net7.0\SocialMedia.Infraestructure.AssemblyInfo.cs
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\obj\Debug\net7.0\SocialMedia.Infraestructure.csproj.CoreCompileInputs.cache
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\obj\Debug\net7.0\SocialMedia.Infraestructure.csproj.CopyComplete
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\obj\Debug\net7.0\SocialMedia.Infraestructure.dll
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\obj\Debug\net7.0\refint\SocialMedia.Infraestructure.dll
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\obj\Debug\net7.0\SocialMedia.Infraestructure.pdb
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\obj\Debug\net7.0\ref\SocialMedia.Infraestructure.dll
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\bin\Debug\net7.0\SocialMedia.Infraestructure.runtimeconfig.json
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.Infraestructure\obj\Debug\net7.0\SocialMedia.Infraestructure.genruntimeconfig.cache
