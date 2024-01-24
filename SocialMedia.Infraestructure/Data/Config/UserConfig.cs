@@ -13,7 +13,7 @@ namespace SocialMedia.Infraestructure.Data.Config
             entity.ToTable("Usuario");
             entity.Property(e => e.UserId).HasColumnName("IdUsuario");
             entity.Property(e => e.LastName)
-                .HasColumnName("Apellido")
+                .HasColumnName("Apellidos")
                 .HasMaxLength(50)
                 .IsUnicode(false);
             entity.Property(e => e.Email)
@@ -27,6 +27,7 @@ namespace SocialMedia.Infraestructure.Data.Config
             entity.Property(e => e.Phone).HasColumnName("Telefono")
                 .HasMaxLength(10)
                 .IsUnicode(false);
+            entity.Property(e => e.isActive).HasColumnName("Activo");
         }
     }
 }

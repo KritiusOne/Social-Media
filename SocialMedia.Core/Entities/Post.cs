@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace SocialMedia.Core.Entities;
+﻿namespace SocialMedia.Core.Entities;
 
 public partial class Post
 {
