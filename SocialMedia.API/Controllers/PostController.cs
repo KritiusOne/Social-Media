@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Interfaces;
 
@@ -18,7 +19,15 @@ namespace SocialMedia.API.Controllers
         public async Task<IActionResult> GetPosts()
         {
             var post = await _postRepository.GetPosts();
-            return Ok(post);
+            var postsDTO = post.Select(p => new PostDTO
+            {
+                PostID = p.PostId,
+                UserId = p.UserId,
+                Date = p.Date,
+                Description = p.Description,
+                Image = p.Image
+            });
+            return Ok(postsDTO);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPost(int id)
@@ -27,15 +36,15 @@ namespace SocialMedia.API.Controllers
             return Ok(post);
         }
         [HttpPost]
-        public async Task<IActionResult> CreatePost(Post post)
+        public async Task<IActionResult> CreatePost(PostDTO post)
         {
            await _postRepository.CreatePost(post);
             return Ok();
         }
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutPost(int id, Post post)
+        [HttpPut]
+        public async Task<IActionResult> PutPost(PostDTO post)
         {
-            await _postRepository.PutPost(id, post);
+            await _postRepository.PutPost(post);
             return Ok("The elemente is Update");
         }
         [HttpDelete("{id}")]
