@@ -6,8 +6,8 @@ namespace SocialMedia.Core.Interfaces
     public interface IPostRepository
     {
         Task<IEnumerable<Post>> GetPosts();
-        Task<PostDTO> GetPost(int id);
-        Task CreatePost(PostDTO post);
+        Task<Post> GetPost(int id);
+        Task<int> CreatePost(Post post);
         Task<int> PutPost(PostDTO post);
         Task<int> DeletePost(int id);
     }

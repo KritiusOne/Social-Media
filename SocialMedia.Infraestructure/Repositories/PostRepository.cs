@@ -19,37 +19,24 @@ namespace SocialMedia.Infraestructure.Repositories
             var posts = await _context.Posts.ToListAsync();
             return posts;
         }
-        public async Task<PostDTO> GetPost(int id)
+        public async Task<Post> GetPost(int id)
         {
             var post = await _context.Posts.FindAsync(id);
             if (post == null)
             {
                 throw new Exception($"No se encuentran registros en la tabla post para {id}");
             }
-            PostDTO DTOpost = new PostDTO{
-                PostID = post.PostId,
-                UserId = post.UserId,
-                Date = post.Date,
-                Description = post.Description,
-                Image = post.Image
-            };
-            return DTOpost;
+            return post;
         }
-        public async Task CreatePost(PostDTO post)
+        public async Task<int> CreatePost(Post post)
         {
-            Post newPost = new Post()
-            {
-                UserId = post.UserId,
-                Date = post.Date,
-                Description = post.Description,
-                Image = post.Image
-            };
-            _context.Posts.Add(newPost);
+            _context.Posts.Add(post);
             await _context.SaveChangesAsync();
+            return 1;
         }
         public async Task<int> PutPost(PostDTO post)
         {
-            var updatedPost = await _context.Posts.FindAsync(post.PostID);
+            var updatedPost = await _context.Posts.FindAsync(post.PostId);
             if(updatedPost == null)
             {
                 return -1;
@@ -59,7 +46,7 @@ namespace SocialMedia.Infraestructure.Repositories
             updatedPost.Date = post.Date; //Quiza en la inteligencia del negocio sea mejor que haya un campo que sea updateDate y CreatedDate: 
             _context.Posts.Update(updatedPost);
             await _context.SaveChangesAsync();
-            return post.PostID;
+            return post.PostId;
         }
         public async Task<int> DeletePost(int id)
         {

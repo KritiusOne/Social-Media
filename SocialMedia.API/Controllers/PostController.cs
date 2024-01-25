@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Interfaces;
@@ -11,35 +12,32 @@ namespace SocialMedia.API.Controllers
     {
         //Inyección de dependencias 
         private readonly IPostRepository _postRepository;
-        public PostController(IPostRepository postRepository)
+        private readonly IMapper _mapper;
+        public PostController(IPostRepository postRepository, IMapper mapper)
         {
-            _postRepository = postRepository;            
+            _postRepository = postRepository;
+            _mapper = mapper;
         }
         [HttpGet]
         public async Task<IActionResult> GetPosts()
         {
             var post = await _postRepository.GetPosts();
-            var postsDTO = post.Select(p => new PostDTO
-            {
-                PostID = p.PostId,
-                UserId = p.UserId,
-                Date = p.Date,
-                Description = p.Description,
-                Image = p.Image
-            });
+            var postsDTO = _mapper.Map<IEnumerable<PostDTO>>(post);
             return Ok(postsDTO);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPost(int id)
         {
             var post = await _postRepository.GetPost(id);
-            return Ok(post);
+            PostDTO postDTO = _mapper.Map<PostDTO>(post);
+            return Ok(postDTO);
         }
         [HttpPost]
         public async Task<IActionResult> CreatePost(PostDTO post)
         {
-           await _postRepository.CreatePost(post);
-            return Ok();
+            Post newPost = _mapper.Map<Post>(post);
+            int response = await _postRepository.CreatePost(newPost);
+            return response == 1? Ok(newPost) : NotFound("Error al crear el nuevo post");
         }
         [HttpPut]
         public async Task<IActionResult> PutPost(PostDTO post)
