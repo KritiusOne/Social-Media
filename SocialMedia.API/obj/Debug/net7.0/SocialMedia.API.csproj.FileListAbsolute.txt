@@ -80,3 +80,6 @@ C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.
 C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\AutoMapper.dll
 C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\FluentValidation.dll
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll

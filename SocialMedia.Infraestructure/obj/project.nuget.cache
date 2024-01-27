@@ -1,12 +1,15 @@
 {
   "version": 2,
-  "dgSpecHash": "1HL+o/bzb7AtFf7c8t2StFpWP0QcMsUBwV2VvRmMt4GRMoLnrrUiqpzrZuZ4W06AcWVkXG8l5doFL/PzkEQLSw==",
+  "dgSpecHash": "2hjCzg0dZXlg610yFj5tv2p02Kac19Y2rAFBSQH5+NbrXKUwLSuJI0hEawBzbCxXVSgz35Iuh1OYIki1zqxTPQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\hp\\Documents\\workspace\\.NET\\socialMedia\\SocialMedia.Infraestructure\\SocialMedia.Infraestructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\hp\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\fluentvalidation\\11.5.1\\fluentvalidation.11.5.1.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

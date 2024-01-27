@@ -1,6 +1,8 @@
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Infraestructure.Data;
+using SocialMedia.Infraestructure.Filters;
 using SocialMedia.Infraestructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,6 +19,13 @@ builder.Services.AddDbContext<SocialMediaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.AddTransient<IPostRepository, PostRepository>();
+builder.Services.AddMvc(opt =>
+{
+    opt.Filters.Add<ValidationFilter>();
+}).AddFluentValidation(opt =>
+{
+    opt.RegisterValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
