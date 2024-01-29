@@ -32,7 +32,7 @@ namespace SocialMedia.Infraestructure.Repositories
         {
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
-            return 1;
+            return post.UserId;            
         }
         public async Task<int> PutPost(PostDTO post)
         {

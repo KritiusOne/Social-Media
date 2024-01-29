@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using SocialMedia.API.response;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Interfaces;
@@ -11,45 +12,71 @@ namespace SocialMedia.API.Controllers
     public class PostController : ControllerBase
     {
         //Inyección de dependencias 
-        private readonly IPostRepository _postRepository;
+        private readonly IPostService _postService;
         private readonly IMapper _mapper;
-        public PostController(IPostRepository postRepository, IMapper mapper)
+        public PostController(IPostService postService, IMapper mapper)
         {
-            _postRepository = postRepository;
+            _postService = postService;
             _mapper = mapper;
         }
         [HttpGet]
         public async Task<IActionResult> GetPosts()
         {
-            var post = await _postRepository.GetPosts();
+            var post = await _postService.GetPosts();
             var postsDTO = _mapper.Map<IEnumerable<PostDTO>>(post);
-            return Ok(postsDTO);
+            var Response = new ApiResponse<IEnumerable<PostDTO>>(postsDTO)
+            {
+                Message = "this requiest is sucess",
+                StatusCode = 200
+            };
+
+            return Ok(Response);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPost(int id)
         {
-            var post = await _postRepository.GetPost(id);
+            var post = await _postService.GetPost(id);
             PostDTO postDTO = _mapper.Map<PostDTO>(post);
-            return Ok(postDTO);
+            var response = new ApiResponse<PostDTO>(postDTO)
+            {
+                Message = "this requiest is sucess",
+                StatusCode = 200
+            };
+            return Ok(response);
         }
         [HttpPost]
         public async Task<IActionResult> CreatePost(PostDTO post)
         {
             Post newPost = _mapper.Map<Post>(post);
-            int response = await _postRepository.CreatePost(newPost);
-            return response == 1? Ok(newPost) : NotFound("Error al crear el nuevo post");
+            var response = await _postService.CreatePost(newPost);
+            var toResponse = new ApiResponse<int>(response)
+            {
+                Message = "The New Post is created",
+                StatusCode = 201
+            };
+            return Ok(toResponse); //la validaciones son por medio de los filtros, dejando nuestros controlladores / endpoints mas limpios
         }
         [HttpPut]
         public async Task<IActionResult> PutPost(PostDTO post)
         {
-            await _postRepository.PutPost(post);
-            return Ok("The elemente is Update");
+            var response = await _postService.PutPost(post);
+            var toResponse = new ApiResponse<int>(response)
+            {
+                Message = "The elemente is Update",
+                StatusCode = 200
+            };
+            return Ok(toResponse);
         }
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletePost(int id)
         {
-            int response = await _postRepository.DeletePost(id);
-            return response == -1 ? NotFound(id) : Ok("This Element is remove");
+            int response = await _postService.DeletePost(id);
+            var toResponse = new ApiResponse<int>(response)
+            {
+                Message = "The elemente is delete",
+                StatusCode = 200
+            };
+            return Ok(toResponse);
         }
     }
 }

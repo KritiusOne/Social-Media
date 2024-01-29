@@ -16,12 +16,18 @@ builder.Services.AddControllers().ConfigureApiBehaviorOptions(opt =>
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 builder.Services.AddDbContext<SocialMediaContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
 builder.Services.AddTransient<IPostRepository, PostRepository>();
+builder.Services.AddTransient<IPostService, PostService>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+
 builder.Services.AddMvc(opt =>
 {
     opt.Filters.Add<ValidationFilter>();
