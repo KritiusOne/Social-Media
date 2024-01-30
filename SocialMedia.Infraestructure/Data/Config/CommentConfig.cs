@@ -8,11 +8,11 @@ namespace SocialMedia.Infraestructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<Comment> entity)
         {
-            entity.HasKey(e => e.CommentId);
+            entity.HasKey(e => e.Id);
 
             entity.ToTable("Comentario");
 
-            entity.Property(e => e.CommentId).HasColumnName("IdComentario").ValueGeneratedNever();
+            entity.Property(e => e.Id).HasColumnName("IdComentario").ValueGeneratedNever();
             entity.Property(e => e.Description).
                 HasColumnName("Descripcion")
                 .HasMaxLength(500)

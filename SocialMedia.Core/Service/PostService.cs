@@ -11,19 +11,30 @@ namespace SocialMedia.Core.Interfaces
 
     public class PostService : IPostService
     {
-        private readonly IPostRepository _postRepository;
-        private readonly IUserRepository _userRepository;
-        public PostService(IPostRepository postRepository, IUserRepository userR)
+        private readonly IRepository<Post> _postRepository;
+        private readonly IRepository<User> _userRepository;
+        private readonly IRepository<Comment> _commentRepository;
+        public PostService(IRepository<Post> postRepository, IRepository<User> userR)
         {
             _postRepository = postRepository;
             _userRepository = userR;
         }
+        public async Task<Post> GetPost(int id)
+        {
+            var response = await _postRepository.GetById(id);
+            return response;
+        }
 
+        public async Task<IEnumerable<Post>> GetPosts()
+        {
+            var response = await _postRepository.GetAll();
+            return response;
+        }
         public async Task<int> CreatePost(Post post)
         {
-            var user = await _userRepository.GetUserAsync(post.UserId);
+            var user = await _userRepository.GetById(post.UserId);
             Console.WriteLine(user);
-            if(user == null)
+            if (user == null)
             {
                 throw new Exception("User doesn't exist");
             }
@@ -31,32 +42,18 @@ namespace SocialMedia.Core.Interfaces
             {
                 throw new Exception("El post rompe las reglas de la comunidad");
             }
-            var response = await _postRepository.CreatePost(post);
-            return response;
+            await _postRepository.Add(post);
+            return post.Id;
         }
-
+        public async Task<int> PutPost(int id, Post post)
+        {
+            await _postRepository.Update(id, post);
+            return post.Id;
+        }
         public async Task<int> DeletePost(int id)
         {
-            var response = await _postRepository.DeletePost(id);
-            return response;
-        }
-
-        public async Task<Post> GetPost(int id)
-        {
-            var response = await _postRepository.GetPost(id);
-            return response;
-        }
-
-        public async Task<IEnumerable<Post>> GetPosts()
-        {
-            var response = await _postRepository.GetPosts();
-            return response;
-        }
-
-        public async Task<int> PutPost(PostDTO post)
-        {
-            var response = await _postRepository.PutPost(post);
-            return response;
+            await _postRepository.Delete(id);
+            return id;
         }
     }
 }

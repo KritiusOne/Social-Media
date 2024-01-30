@@ -8,10 +8,10 @@ namespace SocialMedia.Infraestructure.Data.Config
     {
         public void Configure(EntityTypeBuilder<User> entity)
         {
-            entity.HasKey(e => e.UserId);
+            entity.HasKey(e => e.Id);
 
             entity.ToTable("Usuario");
-            entity.Property(e => e.UserId).HasColumnName("IdUsuario");
+            entity.Property(e => e.Id).HasColumnName("IdUsuario");
             entity.Property(e => e.LastName)
                 .HasColumnName("Apellidos")
                 .HasMaxLength(50)

@@ -24,10 +24,8 @@ builder.Services.AddDbContext<SocialMediaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddTransient<IPostRepository, PostRepository>();
 builder.Services.AddTransient<IPostService, PostService>();
-builder.Services.AddTransient<IUserRepository, UserRepository>();
-
+builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 builder.Services.AddMvc(opt =>
 {
     opt.Filters.Add<ValidationFilter>();

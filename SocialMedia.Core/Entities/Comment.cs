@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace SocialMedia.Core.Entities;
 
-public class Comment
+public class Comment : BaseEntity
 {
-    public int CommentId { get; set; }
-
     public int PostId { get; set; }
 
     public int UserId { get; set; }

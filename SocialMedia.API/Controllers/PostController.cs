@@ -56,10 +56,11 @@ namespace SocialMedia.API.Controllers
             };
             return Ok(toResponse); //la validaciones son por medio de los filtros, dejando nuestros controlladores / endpoints mas limpios
         }
-        [HttpPut]
-        public async Task<IActionResult> PutPost(PostDTO post)
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutPost(int id, PostDTO post)
         {
-            var response = await _postService.PutPost(post);
+            var UpdatePost = _mapper.Map<Post>(post);
+            var response = await _postService.PutPost(id, UpdatePost);
             var toResponse = new ApiResponse<int>(response)
             {
                 Message = "The elemente is Update",
