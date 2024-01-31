@@ -11,28 +11,25 @@ namespace SocialMedia.Core.Interfaces
 
     public class PostService : IPostService
     {
-        private readonly IRepository<Post> _postRepository;
-        private readonly IRepository<User> _userRepository;
-        private readonly IRepository<Comment> _commentRepository;
-        public PostService(IRepository<Post> postRepository, IRepository<User> userR)
+        private readonly IUnitOfWork _unitOfWork;
+        public PostService(IUnitOfWork unitOfWork)
         {
-            _postRepository = postRepository;
-            _userRepository = userR;
+            _unitOfWork = unitOfWork;
         }
         public async Task<Post> GetPost(int id)
         {
-            var response = await _postRepository.GetById(id);
+            var response = await _unitOfWork.PostRepo.GetById(id);
             return response;
         }
 
         public async Task<IEnumerable<Post>> GetPosts()
         {
-            var response = await _postRepository.GetAll();
+            var response = await _unitOfWork.PostRepo.GetAll();
             return response;
         }
         public async Task<int> CreatePost(Post post)
         {
-            var user = await _userRepository.GetById(post.UserId);
+            var user = await _unitOfWork.UserRepo.GetById(post.UserId);
             Console.WriteLine(user);
             if (user == null)
             {
@@ -42,17 +39,17 @@ namespace SocialMedia.Core.Interfaces
             {
                 throw new Exception("El post rompe las reglas de la comunidad");
             }
-            await _postRepository.Add(post);
+            await _unitOfWork.PostRepo.Add(post);
             return post.Id;
         }
         public async Task<int> PutPost(int id, Post post)
         {
-            await _postRepository.Update(id, post);
+            await _unitOfWork.PostRepo.Update(id, post);
             return post.Id;
         }
         public async Task<int> DeletePost(int id)
         {
-            await _postRepository.Delete(id);
+            await _unitOfWork.PostRepo.Delete(id);
             return id;
         }
     }

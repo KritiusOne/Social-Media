@@ -25,6 +25,7 @@ builder.Services.AddDbContext<SocialMediaContext>(options =>
 });
 
 builder.Services.AddTransient<IPostService, PostService>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
 builder.Services.AddMvc(opt =>
 {
