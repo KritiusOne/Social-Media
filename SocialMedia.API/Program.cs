@@ -9,7 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers().ConfigureApiBehaviorOptions(opt =>
+builder.Services.AddControllers(options =>
+{
+    options.Filters.Add<GlobalExceptionFilter>();
+}).ConfigureApiBehaviorOptions(opt =>
 {
     //opt.SuppressModelStateInvalidFilter = true;
 });

@@ -1,5 +1,6 @@
 ﻿using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
+using SocialMedia.Core.Exceptions;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Infraestructure.Repositories;
 //Reglas que se implementarán:
@@ -32,11 +33,11 @@ namespace SocialMedia.Core.Interfaces
             var user = await _unitOfWork.UserRepo.GetById(post.UserId);
             if (user == null)
             {
-                throw new Exception("User doesn't exist");
+                throw new BussinessException("User doesn't exist");
             }
             if (post.Description.Contains("sex"))
             {
-                throw new Exception("El post rompe las reglas de la comunidad");
+                throw new BussinessException("El post rompe las reglas de la comunidad");
             }
             var UserPost = await _unitOfWork.PostRepo.GetPostsByUser(post.UserId);
             Console.WriteLine(UserPost.Count());
@@ -45,7 +46,7 @@ namespace SocialMedia.Core.Interfaces
                 var lastPost = UserPost.OrderByDescending(x => x.Date).FirstOrDefault();
                 if((DateTime.Now - lastPost.Date).TotalDays < 7)
                 {
-                    throw new Exception("You are not able from publish");
+                    throw new BussinessException("You are not able from publish");
                 }
             }
             await _unitOfWork.PostRepo.Add(post);
