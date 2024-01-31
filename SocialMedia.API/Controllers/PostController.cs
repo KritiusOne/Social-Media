@@ -22,7 +22,7 @@ namespace SocialMedia.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetPosts()
         {
-            var post = await _postService.GetPosts();
+            var post = _postService.GetPosts();
             var postsDTO = _mapper.Map<IEnumerable<PostDTO>>(post);
             var Response = new ApiResponse<IEnumerable<PostDTO>>(postsDTO)
             {

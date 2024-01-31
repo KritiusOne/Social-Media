@@ -22,15 +22,14 @@ namespace SocialMedia.Core.Interfaces
             return response;
         }
 
-        public async Task<IEnumerable<Post>> GetPosts()
+        public IEnumerable<Post> GetPosts()
         {
-            var response = await _unitOfWork.PostRepo.GetAll();
+            var response =  _unitOfWork.PostRepo.GetAll();
             return response;
         }
         public async Task<int> CreatePost(Post post)
         {
             var user = await _unitOfWork.UserRepo.GetById(post.UserId);
-            Console.WriteLine(user);
             if (user == null)
             {
                 throw new Exception("User doesn't exist");
@@ -39,12 +38,24 @@ namespace SocialMedia.Core.Interfaces
             {
                 throw new Exception("El post rompe las reglas de la comunidad");
             }
+            var UserPost = await _unitOfWork.PostRepo.GetPostsByUser(post.UserId);
+            Console.WriteLine(UserPost.Count());
+            if(UserPost.Count() < 10)
+            {
+                var lastPost = UserPost.OrderByDescending(x => x.Date).FirstOrDefault();
+                if((DateTime.Now - lastPost.Date).TotalDays < 7)
+                {
+                    throw new Exception("You are not able from publish");
+                }
+            }
             await _unitOfWork.PostRepo.Add(post);
+            await _unitOfWork.SaveChangesAsync();
             return post.Id;
         }
         public async Task<int> PutPost(int id, Post post)
         {
-            await _unitOfWork.PostRepo.Update(id, post);
+            _unitOfWork.PostRepo.Update(id, post);
+            await _unitOfWork.SaveChangesAsync();
             return post.Id;
         }
         public async Task<int> DeletePost(int id)
