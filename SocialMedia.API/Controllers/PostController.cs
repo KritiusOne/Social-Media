@@ -4,6 +4,7 @@ using SocialMedia.API.response;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Interfaces;
+using SocialMedia.Core.QueryFilter;
 
 namespace SocialMedia.API.Controllers
 {
@@ -20,9 +21,9 @@ namespace SocialMedia.API.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        public async Task<IActionResult> GetPosts()
+        public IActionResult GetPosts( [FromQuery]PostQueryFilter filter)
         {
-            var post = _postService.GetPosts();
+            var post = _postService.GetPosts(filter);
             var postsDTO = _mapper.Map<IEnumerable<PostDTO>>(post);
             var Response = new ApiResponse<IEnumerable<PostDTO>>(postsDTO)
             {

@@ -2,6 +2,7 @@
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Exceptions;
 using SocialMedia.Core.Interfaces;
+using SocialMedia.Core.QueryFilter;
 using SocialMedia.Infraestructure.Repositories;
 //Reglas que se implementarán:
 //1. Si se desea publicar un post debe ser un usuario previamente registrado 
@@ -23,9 +24,22 @@ namespace SocialMedia.Core.Interfaces
             return response;
         }
 
-        public IEnumerable<Post> GetPosts()
+        public IEnumerable<Post> GetPosts(PostQueryFilter filter)
         {
             var response =  _unitOfWork.PostRepo.GetAll();
+            
+            if (filter.UserId != null)
+            {
+                response = response.Where(x => x.UserId == filter.UserId);
+            }
+            if (filter.Date != null)
+            {
+                response = response.Where(x => x.Date.ToShortDateString() == filter.Date?.ToShortDateString());
+            }
+            if (filter.Descript != null)
+            {
+                response = response.Where(x => x.Description.ToLower().Contains(filter.Descript.ToLower()));
+            }
             return response;
         }
         public async Task<int> CreatePost(Post post)
