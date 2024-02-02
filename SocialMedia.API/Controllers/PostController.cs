@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using SocialMedia.API.response;
 using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
@@ -25,13 +26,22 @@ namespace SocialMedia.API.Controllers
         {
             var post = _postService.GetPosts(filter);
             var postsDTO = _mapper.Map<IEnumerable<PostDTO>>(post);
-            var Response = new ApiResponse<IEnumerable<PostDTO>>(postsDTO)
+            var response = new ApiResponse<IEnumerable<PostDTO>>(postsDTO)
             {
                 Message = "this requiest is sucess",
                 StatusCode = 200
             };
-
-            return Ok(Response);
+            var metadata = new
+            {
+                post.PageCount,
+                post.PageSize,
+                post.CurrentPage,
+                post.TotalPage,
+                post.hasNextPage,
+                post.hasPreviousPage
+            };
+            Response.Headers.Add("x-pagination", JsonConvert.SerializeObject(metadata));
+            return Ok(response);
         }
         [HttpGet("{id}")]
         public async Task<IActionResult> GetPost(int id)

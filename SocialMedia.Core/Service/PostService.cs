@@ -1,4 +1,5 @@
-﻿using SocialMedia.Core.DTOs;
+﻿using SocialMedia.Core.CustomEntities;
+using SocialMedia.Core.DTOs;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Exceptions;
 using SocialMedia.Core.Interfaces;
@@ -24,7 +25,7 @@ namespace SocialMedia.Core.Interfaces
             return response;
         }
 
-        public IEnumerable<Post> GetPosts(PostQueryFilter filter)
+        public PagedList<Post> GetPosts(PostQueryFilter filter)
         {
             var response =  _unitOfWork.PostRepo.GetAll();
             
@@ -40,7 +41,8 @@ namespace SocialMedia.Core.Interfaces
             {
                 response = response.Where(x => x.Description.ToLower().Contains(filter.Descript.ToLower()));
             }
-            return response;
+            var pagedPost = PagedList<Post>.CreatePagedList(response, filter.PageNumber, filter.PageSize);
+            return pagedPost;
         }
         public async Task<int> CreatePost(Post post)
         {
