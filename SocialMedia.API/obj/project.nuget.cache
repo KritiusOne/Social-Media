@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "EgOCEQrB6aYL3hzYUxD2KRc84viwY6bNEspg0gBtZZ3WUbKvyJhjXLRnM2d9Ee1VLlIWV2z4kgm/3e3LDvZupQ==",
+  "dgSpecHash": "9dQTkhNqsvBtpO1CzW/wMFfqtzmL32fiSq4U/bDWPAI+duSZIrgBWmT0719KvJ9QagLCWXo1KsCe1K7gw8GbZQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\hp\\Documents\\workspace\\.NET\\socialMedia\\SocialMedia.API\\SocialMedia.API.csproj",
   "expectedPackageFiles": [
@@ -12,6 +12,7 @@
     "C:\\Users\\hp\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.0\\fluentvalidation.aspnetcore.11.3.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.5.1\\fluentvalidation.dependencyinjectionextensions.11.5.1.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.0\\microsoft.aspnetcore.authentication.jwtbearer.7.0.0.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.7\\microsoft.aspnetcore.openapi.7.0.7.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\hp\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
