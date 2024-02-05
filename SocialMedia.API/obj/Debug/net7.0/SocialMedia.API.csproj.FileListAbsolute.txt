@@ -84,3 +84,6 @@ C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.
 C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\FluentValidation.AspNetCore.dll
 C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\FluentValidation.DependencyInjectionExtensions.dll
 C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\Microsoft.Extensions.Options.dll
+C:\Users\hp\Documents\workspace\.NET\socialMedia\SocialMedia.API\bin\Debug\net7.0\Microsoft.Extensions.Primitives.dll

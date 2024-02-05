@@ -1,10 +1,8 @@
-﻿using SocialMedia.Core.CustomEntities;
-using SocialMedia.Core.DTOs;
+﻿using Microsoft.Extensions.Options;
+using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.Entities;
 using SocialMedia.Core.Exceptions;
-using SocialMedia.Core.Interfaces;
 using SocialMedia.Core.QueryFilter;
-using SocialMedia.Infraestructure.Repositories;
 //Reglas que se implementarán:
 //1. Si se desea publicar un post debe ser un usuario previamente registrado 
 //2. Si el user tiene menos de 10 post, solo puede hacer 1 por semana
@@ -15,9 +13,11 @@ namespace SocialMedia.Core.Interfaces
     public class PostService : IPostService
     {
         private readonly IUnitOfWork _unitOfWork;
-        public PostService(IUnitOfWork unitOfWork)
+        private readonly PaginationOptions _paginationOptions;
+        public PostService(IUnitOfWork unitOfWork, IOptions<PaginationOptions> options)
         {
             _unitOfWork = unitOfWork;
+            _paginationOptions = options.Value;
         }
         public async Task<Post> GetPost(int id)
         {
@@ -27,6 +27,8 @@ namespace SocialMedia.Core.Interfaces
 
         public PagedList<Post> GetPosts(PostQueryFilter filter)
         {
+            filter.PageNumber = filter.PageNumber == 0 ? _paginationOptions.DefaultPageNumber : filter.PageNumber;
+            filter.PageSize = filter.PageSize == 0 ? _paginationOptions.DefaultPageSize : filter.PageSize;
             var response =  _unitOfWork.PostRepo.GetAll();
             
             if (filter.UserId != null)

@@ -1,9 +1,11 @@
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
+using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.Interfaces;
 using SocialMedia.Infraestructure.Data;
 using SocialMedia.Infraestructure.Filters;
 using SocialMedia.Infraestructure.Repositories;
+using SocialMedia.Infraestructure.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +18,6 @@ builder.Services.AddControllers(options =>
 {
     //opt.SuppressModelStateInvalidFilter = true;
 });
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -26,10 +27,17 @@ builder.Services.AddDbContext<SocialMediaContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
-
+builder.Services.Configure<PaginationOptions>(builder.Configuration.GetSection("Pagination"));   
 builder.Services.AddTransient<IPostService, PostService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+builder.Services.AddSingleton<IUriService>(provider =>
+{
+    var accesor = provider.GetRequiredService<IHttpContextAccessor>();
+    var request = accesor.HttpContext.Request;
+    var absoluteUri = string.Concat(request.Scheme, "://", request.Host.ToUriComponent());
+    return new UriService(absoluteUri);
+});
 
 builder.Services.AddMvc(opt =>
 {
