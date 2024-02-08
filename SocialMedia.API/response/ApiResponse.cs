@@ -11,7 +11,7 @@ namespace SocialMedia.API.response
         public string? Message { get; set; }
         public int StatusCode { get; set; }
         public T Data { get; set; }
-        public MetaData Meta { get; set; }
+        public MetaData? Meta { get; set; }
 
     }
 }

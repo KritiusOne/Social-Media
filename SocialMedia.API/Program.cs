@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using SocialMedia.Core.CustomEntities;
 using SocialMedia.Core.Interfaces;
+using SocialMedia.Core.Service;
 using SocialMedia.Infraestructure.Data;
 using SocialMedia.Infraestructure.Filters;
 using SocialMedia.Infraestructure.Repositories;
@@ -48,9 +49,12 @@ builder.Services.AddDbContext<SocialMediaContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 builder.Services.Configure<PaginationOptions>(builder.Configuration.GetSection("Pagination"));   
+
 builder.Services.AddTransient<IPostService, PostService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<ISecurityService, SecurityService>();
 builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+
 builder.Services.AddSingleton<IUriService>(provider =>
 {
     var accesor = provider.GetRequiredService<IHttpContextAccessor>();

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SocialMedia.Core.Entities;
-using SocialMedia.Infraestructure.Data.Config;
+using System.Reflection;
 
 namespace SocialMedia.Infraestructure.Data;
 
@@ -20,15 +20,10 @@ public partial class SocialMediaContext : DbContext
     public virtual DbSet<Post> Posts { get; set; }
 
     public virtual DbSet<User> Users { get; set; }
-
+    public virtual DbSet<Security> Securities { get; set; } 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new CommentConfig());
-        modelBuilder.ApplyConfiguration(new UserConfig());
-        modelBuilder.ApplyConfiguration(new PostConfig());
-
-        base.OnModelCreating(modelBuilder);
+        modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
     }
 
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }
